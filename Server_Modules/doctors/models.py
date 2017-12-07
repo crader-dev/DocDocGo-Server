@@ -2,8 +2,9 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 PHONE_NUMBER_REGEX = RegexValidator(regex='^\+?[0-9]{8,15}', message='Phone number must contain '
-                                                                     'only digits (0-9) and can '
-                                                                     'optionally begin with +.')
+                                                                     'only 8 to 15 digits (0-9) '
+                                                                     'and can optionally begin '
+                                                                     'with +.')
 
 
 class Doctor(models.Model):

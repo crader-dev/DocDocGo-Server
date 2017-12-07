@@ -29,3 +29,6 @@ class EmergencyRequest(models.Model):
     # TODO: location (use django-location-field package?)
     # TODO: voice recording (optional)
     responding_doctor = models.OneToOneField(to='doctors.Doctor', blank=True, null=True)
+
+    def __str__(self):
+        return self.pk + ': ' + self.description

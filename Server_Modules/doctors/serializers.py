@@ -9,4 +9,5 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = ('id', 'status', 'first_name', 'last_name', 'phone_number')
+        fields = ('id', 'status', 'first_name', 'last_name', 'phone_number',
+                  'house_call_radius', 'location', 'current_request')
