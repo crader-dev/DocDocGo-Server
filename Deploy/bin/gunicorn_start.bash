@@ -10,6 +10,7 @@ GROUP=root                                                  # the group to run a
 NUM_WORKERS=3                                               # how many worker processes should Gunicorn spawn
 DJANGO_SETTINGS_MODULE=ddg_core.settings                    # which settings file should Django use
 DJANGO_WSGI_MODULE=ddg_core.wsgi                            # WSGI module name
+LOGFILE=/home/ec2-user/gunicorn.log
 
 echo "Starting $NAME as `whoami`"
 
@@ -30,4 +31,4 @@ exec /usr/local/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
-  --log-file=-
+  --log-file=$LOGFILE
