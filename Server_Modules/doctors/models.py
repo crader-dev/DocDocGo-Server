@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+
 PHONE_NUMBER_REGEX = RegexValidator(regex='^\+?[0-9]{8,15}', message='Phone number must contain '
                                                                      'only 8 to 15 digits (0-9) '
                                                                      'and can optionally begin '
@@ -24,9 +25,8 @@ class Doctor(models.Model):
     phone_number = models.CharField(validators=[PHONE_NUMBER_REGEX], max_length=16)
     # In miles, 0 = unlimited
     house_call_radius = models.PositiveSmallIntegerField()
-    # TODO: location (use django-location-field package?)
-    current_request = models.OneToOneField(to='emergency_requests.EmergencyRequest',
-                                           null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.first_name + ' ' + self.last_name

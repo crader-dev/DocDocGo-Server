@@ -9,4 +9,5 @@ class EmergencyRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EmergencyRequest
-        fields = ('id', 'creation_time', 'last_updated', 'status', 'description', 'responding_doctor')
+        fields = ('id', 'creation_time', 'last_updated', 'status', 'description',
+                  'latitude', 'longitude', 'responding_doctor')

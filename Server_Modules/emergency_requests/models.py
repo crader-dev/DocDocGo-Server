@@ -26,9 +26,12 @@ class EmergencyRequest(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=4, choices=STATUS_CODE_CHOICES, default=WAITING)
     description = models.TextField(max_length=5000)
-    # TODO: location (use django-location-field package?)
-    # TODO: voice recording (optional)
-    responding_doctor = models.OneToOneField(to='doctors.Doctor', blank=True, null=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    # Use unique ForeignKey since OneToOneField requires related field to not be null
+    responding_doctor = models.ForeignKey(unique=True, to='doctors.Doctor', blank=True,
+                                          null=True, related_name='current_request',
+                                          on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.pk + ': ' + self.description
+        return str(self.pk) + ': ' + str(self.description)
