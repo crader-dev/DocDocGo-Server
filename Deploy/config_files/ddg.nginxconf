@@ -41,7 +41,7 @@ http {
     client_max_body_size 4G;
 
     # set the correct host(s) for your site
-    server_name ec2-54-221-52-119.compute-1.amazonaws.com 54.221.52.119;
+    server_name ec2-54-221-52-119.compute-1.amazonaws.com 52.91.203.75;
 
     keepalive_timeout 5;
 
@@ -56,6 +56,9 @@ http {
 #      try_files $uri @proxy_to_app;
 #    }
 
+    location /static/ {
+      root /home/ec2-user/DocDocGo-Server/static/;
+    }
 
     location / {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

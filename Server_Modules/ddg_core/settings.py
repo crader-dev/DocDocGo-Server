@@ -25,8 +25,9 @@ SECRET_KEY = 'c&b4_=3-hrw0@(uu57(09!(7r6ja42z5zay&ids=h13i*%mmy2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-54-221-52-119.compute-1.amazonaws.com', '54.221.52.119']
+ALLOWED_HOSTS = ['ec2-52-91-203-75.compute-1.amazonaws.com', '52.91.203.75']
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -125,5 +126,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+STATIC_ROOT = '/home/ec2-user/DocDocGo-Server/static'
 STATIC_URL = '/static/'
