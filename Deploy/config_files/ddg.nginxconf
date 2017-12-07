@@ -57,7 +57,8 @@ http {
 #    }
 
     location /static/ {
-      root /home/ec2-user/DocDocGo-Server/static/;
+      autoindex on;
+      alias /home/ec2-user/DocDocGo-Server/static/;
     }
 
     location / {
