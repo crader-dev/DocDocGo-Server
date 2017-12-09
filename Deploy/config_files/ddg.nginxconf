@@ -45,23 +45,23 @@ http {
 
     keepalive_timeout 5;
 
-#    location = / {
-#      alias /webapps/RxAct/Client/app/;
-#      try_files /index.html =404;
-#    }
-#
-#    location / {
-#      root /webapps/RxAct/Client/app;
-#      # checks for static file, if not found proxy to app
-#      try_files $uri @proxy_to_app;
-#    }
+    location = /operator/ {
+      alias /home/ec2-user/DocDocGo-Operator-Web-App/src/;
+      try_files /main.html =404;
+    }
 
-    location /static/ {
+    location /operator/ {
+      root /home/ec2-user/DocDocGo-Operator-Web-App/src/;
+      # checks for static file, if not found proxy to app
+      try_files $uri =404;
+    }
+
+    location /api/static/ {
       autoindex on;
       alias /home/ec2-user/DocDocGo-Server/static/;
     }
 
-    location / {
+    location /api/ {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
       # enable this if and only if you use HTTPS
@@ -75,9 +75,5 @@ http {
       proxy_pass http://ddg_app_server;
     }
 
-#    error_page 500 502 503 504 /500.html;
-#    location = /500.html {
-#      root ~/DocDocGo-Operator-Web-App/...;
-#    }
   }
 }
