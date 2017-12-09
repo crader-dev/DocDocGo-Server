@@ -7,7 +7,7 @@ from .models import EmergencyRequest
 from .util.geospatial import haversine_distance
 
 
-REQUEST_TIMEOUT_LIMIT = 60  # Time (in seconds) before request will be timed out
+REQUEST_TIMEOUT_LIMIT = 600  # Time (in seconds) before request will be timed out
 POLLING_FREQUENCY = 20  # Delay (in seconds) between polls for re-queued requests
 
 
