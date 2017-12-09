@@ -12,10 +12,16 @@ POLLING_FREQUENCY = 20  # Delay (in seconds) between polls for re-queued request
 
 
 def assign_doctor(request):
+    # Available doctors are doctors who:
+    #   - Are online
+    #   - Are not currently responding to a request
+    #   - Have not already refused this particular request
+    available_doctors = Doctor.objects.filter(status=Doctor.ONLINE, current_request__isnull=True)\
+                                      .exclude(pk__in=request.refusing_doctors.all())
     # Check all available doctors to see if there are any nearby
     nearest_doctor = None
     nearest_dist = 0
-    for doc in Doctor.objects.filter(status=Doctor.ONLINE, current_request__isnull=True):
+    for doc in available_doctors:
         dist = haversine_distance(doc.latitude, doc.longitude, request.latitude, request.longitude)
         if dist <= doc.house_call_radius and (nearest_doctor is None or dist < nearest_dist):
             nearest_doctor = doc
