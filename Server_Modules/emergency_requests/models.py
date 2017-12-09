@@ -27,7 +27,7 @@ class EmergencyRequest(models.Model):
         (TREATING,  'Treating'),
         (COMPLETE,  'Complete'),
     )
-
+    # TODO: Add severity
     creation_time = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=4, choices=STATUS_CODE_CHOICES, default=WAITING)
