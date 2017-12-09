@@ -41,7 +41,7 @@ http {
     client_max_body_size 4G;
 
     # set the correct host(s) for your site
-    server_name ec2-34-199-76-53.compute-1.amazonaws.com 34.199.76.53;
+    server_name 34.199.76.53;
 
     keepalive_timeout 5;
 
