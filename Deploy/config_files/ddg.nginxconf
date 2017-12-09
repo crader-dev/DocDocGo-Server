@@ -22,7 +22,7 @@ http {
     # to return a good HTTP response
 
     # for UNIX domain socket setups
-    server unix:/home/ec2-user/DocDocGo-Server/run/gunicorn.sock fail_timeout=0;
+    server unix:/webapps/DocDocGo/run/gunicorn.sock fail_timeout=0;
 
     # for a TCP configuration
     # server 192.168.0.7:8000 fail_timeout=0;
@@ -48,19 +48,19 @@ http {
     rewrite ^([^.]*[^/])$ $1/ permanent;
 
     location = /operator/ {
-      alias /home/ec2-user/DocDocGo-Operator-Web-App/src/;
+      alias /webapps/DocDocGo/DocDocGo-Operator-Web-App/src/;
       try_files /main.html =404;
     }
 
     location /operator/ {
-      alias /home/ec2-user/DocDocGo-Operator-Web-App/src/;
+      alias /webapps/DocDocGo/DocDocGo-Operator-Web-App/src/;
       # checks for static file, if not found proxy to app
       try_files $uri =404;
     }
 
     location /api/static/ {
       autoindex on;
-      alias /home/ec2-user/DocDocGo-Server/static/;
+      alias /webapps/DocDocGo/DocDocGo-Server/static/;
     }
 
     location /api/ {

@@ -2,15 +2,15 @@
 
 # Courtesy of: http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/
 
-NAME="DocDocGo"                                             # Name of the application
-DJANGODIR=/home/ec2-user/DocDocGo-Server/Server_Modules     # Django project directory
-SOCKFILE=/home/ec2-user/DocDocGo-Server/run/gunicorn.sock   # we will communicate using this unix socket
-USER=root                                                   # the user to run as
-GROUP=root                                                  # the group to run as
-NUM_WORKERS=3                                               # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=ddg_core.settings                    # which settings file should Django use
-DJANGO_WSGI_MODULE=ddg_core.wsgi                            # WSGI module name
-LOGFILE=/home/ec2-user/gunicorn.log
+NAME="DocDocGo"                                                # Name of the application
+DJANGODIR=/webapps/DocDocGo/DocDocGo-Server/Server_Modules     # Django project directory
+SOCKFILE=/webapps/DocDocGo/DocDocGo-Server/run/gunicorn.sock  # we will communicate using this unix socket
+USER=ddg                                                       # the user to run as
+GROUP=webapps                                                  # the group to run as
+NUM_WORKERS=3                                                  # how many worker processes should Gunicorn spawn
+DJANGO_SETTINGS_MODULE=ddg_core.settings                       # which settings file should Django use
+DJANGO_WSGI_MODULE=ddg_core.wsgi                               # WSGI module name
+LOGFILE=/webapps/DocDocGo/gunicorn.log
 
 echo "Starting $NAME as `whoami`"
 
