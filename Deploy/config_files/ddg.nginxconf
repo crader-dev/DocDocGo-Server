@@ -45,13 +45,15 @@ http {
 
     keepalive_timeout 5;
 
+    rewrite ^([^.]*[^/])$ $1/ permanent;
+
     location = /operator/ {
       alias /home/ec2-user/DocDocGo-Operator-Web-App/src/;
       try_files /main.html =404;
     }
 
     location /operator/ {
-      root /home/ec2-user/DocDocGo-Operator-Web-App/src/;
+      alias /home/ec2-user/DocDocGo-Operator-Web-App/src/;
       # checks for static file, if not found proxy to app
       try_files $uri =404;
     }
