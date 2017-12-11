@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class EmergencyRequest(models.Model):
@@ -27,10 +28,11 @@ class EmergencyRequest(models.Model):
         (TREATING,  'Treating'),
         (COMPLETE,  'Complete'),
     )
-    # TODO: Add severity
     creation_time = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=4, choices=STATUS_CODE_CHOICES, default=WAITING)
+    pain_severity = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1),
+                                                                            MaxValueValidator(10)])
     description = models.TextField(max_length=5000)
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
