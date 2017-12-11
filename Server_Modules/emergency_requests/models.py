@@ -34,8 +34,8 @@ class EmergencyRequest(models.Model):
     pain_severity = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1),
                                                                             MaxValueValidator(10)])
     description = models.TextField(max_length=5000)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7)
 
     # Use unique ForeignKey since OneToOneField requires related field to not be null
     # This will be set to None once the request is complete
