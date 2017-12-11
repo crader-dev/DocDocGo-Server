@@ -16,4 +16,4 @@ class EmergencyRequestViewSet(viewsets.ModelViewSet):
     queryset = EmergencyRequest.objects.all()
     serializer_class = EmergencyRequestSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('status',)
+    filter_fields = ('status', 'responding_doctor',)
