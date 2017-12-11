@@ -36,11 +36,15 @@ class EmergencyRequest(models.Model):
     description = models.TextField(max_length=5000)
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
+
     # Use unique ForeignKey since OneToOneField requires related field to not be null
+    # This will be set to None once the request is complete
     responding_doctor = models.ForeignKey(unique=True, to='doctors.Doctor', blank=True,
                                           null=True, related_name='current_request',
                                           on_delete=models.SET_NULL)
-
+    # This is populated once the request has been completed
+    completed_by = models.ForeignKey(to='doctors.Doctor', blank=True, null=True,
+                                     related_name='completed_requests', on_delete=models.SET_NULL)
     refusing_doctors = models.ManyToManyField(to='doctors.Doctor', blank=True, related_name='+')
 
     def set_status(self, status):
@@ -61,6 +65,12 @@ class EmergencyRequest(models.Model):
         self.refusing_doctors.add(self.responding_doctor)
         self.responding_doctor = None
         self.status = EmergencyRequest.ACCEPTED
+        self.save()
+
+    def complete(self):
+        self.completed_by = self.responding_doctor
+        self.responding_doctor = None
+        self.status = EmergencyRequest.COMPLETE
         self.save()
 
     def __str__(self):

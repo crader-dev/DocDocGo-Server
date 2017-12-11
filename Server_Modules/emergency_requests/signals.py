@@ -13,16 +13,15 @@ def handle_request_change(instance, **kwargs):
         request_handling.assign_doctor(instance)
         if instance.responding_doctor is None:
             request_handling.requeue_request(instance)
-    elif status == EmergencyRequest.REQUESTED:
-        pass
+    # elif status == EmergencyRequest.REQUESTED:
+    #     pass
     elif status == EmergencyRequest.REFUSED:
         instance.refuse_responding_doctor()
-    elif status == EmergencyRequest.DENIED:
-        # Send ambulance & notify patient
-        pass
-    elif status == EmergencyRequest.TIMEDOUT:
-        # Send ambulance & Notify patient
-        pass
-    elif status == EmergencyRequest.CONFIRM:  # TODO: Or should we use ENROUTE?
-        # notify patient
-        pass
+    # elif status == EmergencyRequest.DENIED:
+    #     pass
+    # elif status == EmergencyRequest.TIMEDOUT:
+    #     pass
+    # elif status == EmergencyRequest.CONFIRM:  # TODO: Or should we use ENROUTE?
+    #     pass
+    elif status == EmergencyRequest.COMPLETE and instance.responding_doctor is not None:
+        instance.complete()
